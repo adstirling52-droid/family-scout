@@ -17,7 +17,7 @@ jobs:
       - name: Email the digest
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          SMTP_FROM: alan@alanstirling.com
+          SMTP_FROM: FamilyWeekend@alanstirling.com
           PLANNER_TO: alan@alanstirling.com
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
