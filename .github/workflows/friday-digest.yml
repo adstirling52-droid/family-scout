@@ -1,11 +1,9 @@
 ﻿name: Friday weekend digest
-
 on:
   schedule:
     - cron: "0 9 * * 5"
     - cron: "0 10 * * 5"
   workflow_dispatch:
-
 jobs:
   send:
     runs-on: ubuntu-latest
@@ -19,6 +17,7 @@ jobs:
       - name: Email the digest
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SMTP_FROM: alan@alanstirling.com
           PLANNER_TO: alan@alanstirling.com
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -26,4 +25,3 @@ jobs:
           else
             python -m planner --scheduled
           fi
-
