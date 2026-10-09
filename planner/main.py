@@ -38,7 +38,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--scheduled",
         action="store_true",
-        help="Email only when it is 10:00 Europe/London on a Friday.",
+        help="Email from 10:00 Europe/London on Friday, including a late start.",
     )
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -49,7 +49,7 @@ def main(argv: list[str] | None = None) -> int:
         if not is_send_window(now):
             print(
                 f"Not sending. It is {now.strftime('%A %H:%M')} Europe/London, "
-                "and the digest goes out at 10:00 on Friday."
+                "and the digest sends from 10:00 on Friday, including a late start."
             )
             return 0
 

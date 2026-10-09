@@ -6,10 +6,9 @@ The digest is sent by GitHub Actions, not by a server in this project. See [ADR 
 
 | Clock | What runs |
 | --- | --- |
-| Friday 09:00 UTC | Workflow starts. Sends only during British Summer Time, when London is at 10:00. |
-| Friday 10:00 UTC | Workflow starts. Sends only during Greenwich Mean Time, when London is at 10:00. |
+| Friday 09:00 UTC | The only scheduled run. Sends when London is Friday and the time is 10:00 or later, including a late start. |
 
-The other run exits without sending. You can also run the workflow by hand from the Actions tab; that sends immediately.
+09:00 UTC is 10:00 in London during British Summer Time. During Greenwich Mean Time it is 09:00 in London, so an on-time winter run exits without sending; a run that reaches 10:00 London or later still sends. You can also run the workflow by hand from the Actions tab; that sends immediately.
 
 Recipient: `Alan@alanstirling.com`.
 
@@ -46,7 +45,7 @@ python3 -m planner --send
 
 ## If a Friday mail does not arrive
 
-1. Actions → Friday weekend digest → the Friday run. A green run that says "Not sending" is the extra UTC slot and is expected.
+1. Actions → Friday weekend digest → the Friday run. A green run that says "Not sending" started before 10:00 Europe/London.
 2. A failed run with "Cannot send yet" means a secret is missing or mistyped.
 3. A failed run with "Email failed" means Resend rejected the key, or the message was sent to an address other than the Resend signup address while still using `onboarding@resend.dev`.
 4. If the mail arrived but the weekend events are missing, What's On Edinburgh's page layout has probably changed. Standing places still send. The parser is in `planner/events.py`.

@@ -30,8 +30,12 @@ def coming_weekend(today: date) -> tuple[date, date]:
 
 
 def is_send_window(now: datetime) -> bool:
-    """True only at 10:00 Europe/London on a Friday."""
+    """True on Friday in Europe/London from 10:00 onward.
+
+    GitHub Actions often starts the scheduled job after 10:00, so a late
+    Friday start still sends. Earlier the same morning does not.
+    """
     if now.tzinfo is None:
         now = now.replace(tzinfo=LONDON)
     local = now.astimezone(LONDON)
-    return local.weekday() == SEND_WEEKDAY and local.hour == SEND_HOUR_LONDON
+    return local.weekday() == SEND_WEEKDAY and local.hour >= SEND_HOUR_LONDON

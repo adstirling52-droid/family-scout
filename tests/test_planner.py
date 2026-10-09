@@ -90,15 +90,21 @@ class ScheduleTests(unittest.TestCase):
         self.assertFalse(
             is_send_window(datetime(friday.year, friday.month, friday.day, 9, 15, tzinfo=utc))
         )
+        self.assertTrue(
+            is_send_window(datetime(friday.year, friday.month, friday.day, 16, 52, tzinfo=utc))
+        )
 
     def test_summer_window_is_09_utc(self) -> None:
         friday = self._friday(7)
         utc = ZoneInfo("UTC")
+        self.assertFalse(
+            is_send_window(datetime(friday.year, friday.month, friday.day, 8, 59, tzinfo=utc))
+        )
         self.assertTrue(
             is_send_window(datetime(friday.year, friday.month, friday.day, 9, 5, tzinfo=utc))
         )
-        self.assertFalse(
-            is_send_window(datetime(friday.year, friday.month, friday.day, 10, 5, tzinfo=utc))
+        self.assertTrue(
+            is_send_window(datetime(friday.year, friday.month, friday.day, 16, 52, tzinfo=utc))
         )
 
 

@@ -17,7 +17,7 @@ A Python program in this repo builds the digest. GitHub Actions runs it on Frida
 
 Weather comes from Open-Meteo. Weekend events come from the public What's On Edinburgh listings. Neither needs an API key. Standing places are a curated list in `planner/catalogue.py`.
 
-The workflow runs at 09:00 UTC and 10:00 UTC. The program sends only when the clock in Europe/London says Friday 10:00, so summer time and winter time both hit 10:00 without a second config change.
+The workflow runs once, at 09:00 UTC on Friday. The program sends when Europe/London is Friday and the hour is 10 or later. GitHub Actions often starts after the scheduled minute, and the window stays open so a late start still sends. A second UTC cron is not used: with the window open for the rest of Friday, both the summer and winter slots would send.
 
 ## Consequences
 
