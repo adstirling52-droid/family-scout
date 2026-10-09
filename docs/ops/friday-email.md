@@ -6,9 +6,9 @@ The digest is sent by GitHub Actions, not by a server in this project. See [ADR 
 
 | Clock | What runs |
 | --- | --- |
-| Friday 09:00 UTC | The only scheduled run. Sends when London is Friday and the time is 10:00 or later, including a late start. |
+| Friday 10:00 UTC | The only scheduled run. London is at 10:00 in winter and 11:00 in summer. A later start the same Friday still sends. |
 
-09:00 UTC is 10:00 in London during British Summer Time. During Greenwich Mean Time it is 09:00 in London, so an on-time winter run exits without sending; a run that reaches 10:00 London or later still sends. You can also run the workflow by hand from the Actions tab; that sends immediately.
+10:00 UTC is the earliest single UTC hour that is 10:00 or later in London in both Greenwich Mean Time and British Summer Time. You can also run the workflow by hand from the Actions tab; that sends immediately.
 
 Recipient: `Alan@alanstirling.com`.
 

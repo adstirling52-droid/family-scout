@@ -107,6 +107,16 @@ class ScheduleTests(unittest.TestCase):
             is_send_window(datetime(friday.year, friday.month, friday.day, 16, 52, tzinfo=utc))
         )
 
+    def test_ten_utc_sends_in_summer_and_winter(self) -> None:
+        utc = ZoneInfo("UTC")
+        for month in (1, 7):
+            friday = self._friday(month)
+            self.assertTrue(
+                is_send_window(
+                    datetime(friday.year, friday.month, friday.day, 10, 0, tzinfo=utc)
+                )
+            )
+
 
 class AgeTests(unittest.TestCase):
     def test_rejects_toddler_and_narrow_ages(self) -> None:

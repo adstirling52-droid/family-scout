@@ -18,9 +18,9 @@ That prints the digest for the coming Saturday and Sunday. It does not send emai
 
 ## Friday email
 
-The mail goes to **Alan@alanstirling.com** from **10:00 Europe/London** every Friday, including when the job starts late.
+The mail goes to **Alan@alanstirling.com** on Friday morning, from **10:00 Europe/London** onward, including when the job starts late.
 
-GitHub Actions runs the job once each Friday (`.github/workflows/friday-digest.yml`), at 09:00 UTC. The script sends when London is Friday and the hour is 10 or later, so a delayed start still sends. A second Friday cron is not used, because both slots would send once the window stays open past 10:00.
+GitHub Actions runs the job once each Friday (`.github/workflows/friday-digest.yml`), at 10:00 UTC. That is 10:00 in London in winter and 11:00 in summer, so it sends on a Friday morning in both seasons. If the job starts later the same day, it still sends. A second Friday cron is not used, because both slots would send once the window stays open past 10:00.
 
 Mail goes out through [Resend](https://resend.com/pricing)'s free plan (3,000 emails a month, no charge). The only secret is a send-only API key. Nothing sends until that key is set. Do not put the key in chat or in a file that gets committed.
 

@@ -1,7 +1,9 @@
 ﻿name: Friday weekend digest
 on:
   schedule:
-    - cron: "0 9 * * 5"
+    # 10:00 UTC is 10:00 London in winter and 11:00 in summer.
+    # One slot only: the window stays open after 10:00, so a second cron would email twice.
+    - cron: "0 10 * * 5"
   workflow_dispatch:
 jobs:
   send:
